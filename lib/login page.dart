@@ -5,7 +5,6 @@ import 'package:Expense_management/splashscreen.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'Registration.dart';
 import 'Home_Page.dart';
-import 'homepage.dart';
 import 'package:http/http.dart' as http;
 
 class loginpage extends StatefulWidget {
@@ -20,6 +19,11 @@ class _loginpageState extends State<loginpage> {
   TextEditingController username = TextEditingController();
   TextEditingController password = TextEditingController();
   final GlobalKey<FormState> formkey = GlobalKey<FormState>();
+
+  Get_Usrname() async {
+    final _CustomersharedPrefs = await SharedPreferences.getInstance();
+    await _CustomersharedPrefs.setString("username",get_username);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -163,13 +167,13 @@ class _loginpageState extends State<loginpage> {
 
         // admin_id = singleUser["id"];
         //
-        // email_text_admin = singleUser["email"];
+        get_username = singleUser["username"];
         // print('hello click ${email_text_admin}');
         //
         // // getid = singleUser["id"];
         //
         // getId();
-        // getemail();
+         Get_Usrname();
       }
 
       final snackBar = SnackBar(

@@ -1,30 +1,17 @@
 import 'dart:convert';
+import 'package:Expense_management/settings.dart';
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 
 import 'package:http/http.dart' as http;
+import 'package:shared_preferences/shared_preferences.dart';
 
+import 'Data Model/Data_Model.dart';
 import 'add_transaction.dart';
 import 'confirm_dialog.dart';
 import 'info_snackbar.dart';
 import 'main.dart';
-
-//Creating a class user to store the data;
-class Data_Model {
-  final String id;
-  int amount;
-  final String type;
-  final String note;
-  final DateTime date;
-
-  Data_Model({
-    required this.id,
-    required this.amount,
-    required this.type,
-    required this.note,
-    required this.date,
-  });
-}
+import '';
 
 class Home_Page extends StatefulWidget {
   @override
@@ -89,6 +76,7 @@ class _Home_PageState extends State<Home_Page> {
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(
+          toolbarHeight: 0.0,
           centerTitle: true,
           title: Text(
             "Display Data",
@@ -150,6 +138,78 @@ class _Home_PageState extends State<Home_Page> {
 
                   return ListView(
                     children: [
+                      Padding(
+                        padding: const EdgeInsets.all(
+                          12.0,
+                        ),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            CircleAvatar(
+                              maxRadius: 20,
+                              child: Image.asset("assets/cool.png"),
+                            ),
+                            SizedBox(width: 5,),
+                            SizedBox(
+                              width: 200.0,
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    "Welcome",
+                                    style: TextStyle(
+                                      fontSize: 24.0,
+                                      fontWeight: FontWeight.w700,
+                                      //  color: Static.PrimaryMaterialColor[800],
+                                    ),
+                                    maxLines: 1,
+                                  ),
+                                  Text("${get_username}"),
+                                ],
+                              ),
+                            ),
+                            // IconButton(onPressed: ()async{
+                            //   final SharedPreferences sharedpreferences =
+                            //       await SharedPreferences.getInstance();
+                            //   sharedpreferences.remove('admin_id');
+                            //
+                            //   Navigator.of(context)
+                            //       .pushNamedAndRemoveUntil('/log', (Route<dynamic> route) => false);
+                            //
+                            // }, icon:Icon( Icons.exit_to_app)),
+                            Container(
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(
+                                  12.0,
+                                ),
+                                color: Colors.white70,
+                              ),
+                              padding: EdgeInsets.all(
+                                12.0,
+                              ),
+                              child: InkWell(
+                                onTap: () {
+                                  Navigator.of(context)
+                                      .push(
+                                    MaterialPageRoute(
+                                      builder: (context) => Settings(),
+                                    ),
+                                  )
+                                      .then((value) {
+                                    setState(() {});
+                                  });
+                                },
+                                child: Icon(
+                                  Icons.settings,
+                                  size: 32.0,
+                                  color: Color(0xff3E454C),
+                                ),
+                              ),
+                            ),
+
+                          ],
+                        ),
+                      ),
                       selectMonth(),
                       Container(
                         width: MediaQuery.of(context).size.width * 0.9,

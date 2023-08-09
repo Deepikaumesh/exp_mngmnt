@@ -3,8 +3,8 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'Home_Page.dart';
-import 'homepage.dart';
 import 'login page.dart';
+import 'main.dart';
 
 
 
@@ -32,7 +32,9 @@ class _SplashscreenState extends State<Splashscreen> {
                         Home_Page()));
       });
     });
-    setState(() {});
+    setState(() {
+      Get_Username();
+    });
 
     super.initState();
   }
@@ -71,4 +73,14 @@ class _SplashscreenState extends State<Splashscreen> {
     });
     print('thisis service  value $Admin_key');
   }
+
+
+  Get_Username() async {
+    final SharedPreferences sharedprefs = await SharedPreferences.getInstance();
+    var obtain_admin = await sharedprefs.getString('username');
+
+    setState(() {});
+    get_username = obtain_admin;
+  }
+
 }

@@ -5,6 +5,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:http/http.dart' as http;
+import 'package:shared_preferences/shared_preferences.dart';
 import 'login page.dart';
 
 class Registration extends StatefulWidget {
@@ -45,6 +46,10 @@ class _RegistrationState extends State<Registration> {
   }
 
   final GlobalKey<FormState> formkey = GlobalKey<FormState>();
+
+
+
+
 
 
 
@@ -317,6 +322,9 @@ class _RegistrationState extends State<Registration> {
     var data = jsonDecode(reponse.body);
     var responseMessage = data["message"];
     var responseError = data["error"];
+
+
+
     print("DATA: ${data}");
     if (responseError) {
       setState(() {
@@ -332,6 +340,12 @@ class _RegistrationState extends State<Registration> {
           webPosition: 1,
           backgroundColor: Colors.blueGrey);
     } else {
+
+
+
+
+
+
       _username.clear();
       _email.clear();
       _phone.clear();
